@@ -41,6 +41,12 @@ Route::middleware('isLogin')->group(function () {
     Route::post('/user/post', [AuthController::class, 'store'])->name('user.store');
     Route::get('/user/edit/{id}', [AuthController::class, 'edit']);
     Route::post('/user/update/{id}', [AuthController::class, 'update'])->name('user.update');
+
+
+    Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+
+    Route::get('/sales/export', [SalesController::class, 'exportSales']);
+    Route::get('/staff/sales', [SalesController::class, 'staffSales']);
 });
 
 Route::middleware('isGuest')->group(function () {

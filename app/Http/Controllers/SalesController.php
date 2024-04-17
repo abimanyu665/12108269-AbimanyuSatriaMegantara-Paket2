@@ -8,6 +8,10 @@ use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+
 
 
 class SalesController extends Controller
@@ -18,6 +22,16 @@ class SalesController extends Controller
     public function index()
     {
         $sales = Sales::with('user', 'customer')->get();
+        return view('selling.selling-data', compact('sales'));
+    }
+
+
+    public function exportSales(){
+        return Excel::download(new SalesExport, 'Sales.xlsx');
+    }
+    public function staffSales()
+    {
+        $sales = Sales::with('user', 'customer')->where('user_id', Auth::user()->id)->get();
         return view('selling.selling-data', compact('sales'));
     }
 
@@ -44,8 +58,8 @@ class SalesController extends Controller
 
         $total_price = 0;
         $products = Product::whereIn('id', $data['productCheck'])->get();
-
         foreach($products as $key => $product){
+
             $quantity = $data['quantity'][$key];
             $total_stock = $product->stock - $quantity;
 
@@ -66,15 +80,18 @@ class SalesController extends Controller
 
 
         foreach($products as $key => $product){
+
             $quantity = $data['quantity'][$key];
             $subtotal = $quantity * $product->price;
+            if($data['productCheck'][$key] && $quantity != 0){
+                SalesDetail::create([
+                    'product_id' => $product->id,
+                    'sales_id' => $sales->id,
+                    'subtotal' => $subtotal,
+                    'amount' => $quantity
+                ]);
+            }
 
-            SalesDetail::create([
-                'product_id' => $product->id,
-                'sales_id' => $sales->id,
-                'subtotal' => $subtotal,
-                'amount' => $quantity
-            ]);
         }
 
         return redirect("/selling/detail/{$sales->id}");
@@ -93,10 +110,17 @@ class SalesController extends Controller
      * Show the form for editing the specified resource.
      */
 
-    public function download($id){
-        $sellingData = Sales::with('salesDetail', 'salesDetail.product', 'user', 'customer')->where('id', $id)->first();
-        return view('selling.invoice-download', compact('sellingData'));
+     public function download($id){
+        $sellingData = Sales::with('salesDetail', 'salesDetail.product', 'user', 'customer')->find($id);
+        if (!$sellingData) {
+            return response()->json(['message' => 'Data penjualan tidak ditemukan'], 404);
+        }
+
+
+        $pdf = PDF::loadView('selling.invoice-download', compact('sellingData'));
+        return $pdf->download('invoice_' . $sellingData->id . '.pdf');
     }
+
     public function edit(Sales $sales)
     {
 

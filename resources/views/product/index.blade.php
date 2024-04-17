@@ -16,7 +16,16 @@
             <div class="card">
                 <div class="card-header">
                     <h1>Product Data</h1>
-                    <a href="/product/create" class="btn btn-primary">Add New Product</a>
+                    <div class="">
+
+                        <form action="{{ route('product.search') }}" method="GET" class="d-flex">
+                            <input type="text" class="form-control" name="query" placeholder="Search For Product">
+                            <button class="btn btn-secondary ps-2" type="submit"></button>
+                        </form>
+                    <a href="/product/create" class="btn btn-primary mt-2">Add New Product</a>
+
+                </div>
+
                 </div>
                 <div class="table-responsive">
                     <table class="table">

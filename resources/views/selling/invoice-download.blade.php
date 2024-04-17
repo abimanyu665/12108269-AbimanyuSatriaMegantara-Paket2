@@ -23,19 +23,19 @@
         <!-- END: Vendor CSS-->
 
         <!-- BEGIN: Theme CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css" />
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css" />
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css" />
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css" />
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/bootstrap.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/bootstrap-extended.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/colors.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/components.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/themes/dark-layout.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/themes/semi-dark-layout.css') }}" />
 
         <!-- BEGIN: Page CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}" />
         <!-- END: Page CSS-->
 
         <!-- BEGIN: Custom CSS-->
-        <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style.css') }}" />
         <!-- END: Custom CSS-->
     </head>
 
@@ -55,8 +55,8 @@
                                         <!-- Header starts -->
                                         <div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
                                             <div>
-                                                <img src="/app-assets/images/logo.png" alt="" width="40px">
-                                                <h2>Cashier</h2>
+                                                {{-- <img src="/app-assets/images/logo.png" alt="" width="40px"> --}}
+                                                <h2>Cashier App</h2>
                                             </div>
                                             <div class="mt-md-0 mt-2">
                                                 <h4 class="invoice-title">

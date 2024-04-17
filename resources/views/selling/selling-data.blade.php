@@ -19,7 +19,10 @@
             <div class="card">
                 <div class="card-header">
                     <h1>Selling Data</h1>
-                    <a href="/selling/create" class="btn btn-primary">Add new selling data</a>
+                    <div>
+                        <a href="/selling/create" class="btn btn-primary">Add new selling data</a>
+                        <a href="/sales/export" class="btn btn-success">Export Sales</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table">

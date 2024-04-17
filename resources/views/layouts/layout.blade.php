@@ -109,9 +109,16 @@
                                 class="menu-title text-truncate" data-i18n="Home">Selling</span></a>
                         <ul class="menu-content">
                             <li>
+                                @if (Auth::user()->role == 'admin')
                                 <a class="d-flex align-items-center" href="/selling"><i
-                                        data-feather="file-text"></i><span class="menu-item text-truncate"
-                                        data-i18n="Without Menu">Selling Data</span></a>
+                                    data-feather="file-text"></i><span class="menu-item text-truncate"
+                                    data-i18n="Without Menu">Selling Data</span></a>
+                                @else
+                                <a class="d-flex align-items-center" href="/staff/sales"><i
+                                    data-feather="file-text"></i><span class="menu-item text-truncate"
+                                    data-i18n="Without Menu">Selling Data</span></a>
+                                @endif
+
                             </li>
                         </ul>
                     </li>
